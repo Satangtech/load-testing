@@ -28,6 +28,7 @@ echo "GET http://httpbin.org/get" | vegeta attack -duration=5s -rate=5 | vegeta 
   - send
   - createcontract
   - qrc20transfer
+  - qrc20balanceof
 
 - Modify files `req/*.http` and `req/*.json` for correct information.
 
