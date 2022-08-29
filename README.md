@@ -20,12 +20,19 @@ vegeta --version
 echo "GET http://httpbin.org/get" | vegeta attack -duration=5s -rate=5 | vegeta report
 ```
 
-### Test send method in 1 min with rate 10k/s
+### Test in 1 minute with rate 10k/s
 
-- Modify files `send.http` for rpc url and `send.json` for address.
+- List of method (replace \* with method name)
+
+  - getblockchaininfo
+  - send
+  - createcontract
+  - qrc20transfer
+
+- Modify files `*.http` and `*.json` for correct information.
 
 - Run command
 
   ```bash
-  cat send.http | vegeta attack -duration=60s -rate=10000/s | vegeta report
+  cat *.http | vegeta attack -duration=60s -rate=10000/s | vegeta report
   ```
