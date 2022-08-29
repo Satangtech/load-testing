@@ -1,0 +1,6 @@
+{
+  "jsonrpc": "2.0",
+  "method": "send",
+  "params": [{ "qQyBUzYxg2qgxybnFRPq5d8ttcnvYUdMBw": 1 }],
+  "id": 1
+}
