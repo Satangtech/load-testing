@@ -1,6 +1,0 @@
-{
-  "jsonrpc": "2.0",
-  "method": "getblockchaininfo",
-  "params": [],
-  "id": 1
-}

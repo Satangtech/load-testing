@@ -1,0 +1,16 @@
+{
+  "name": "load-testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Satangtech/load-testing.git",
+  "author": "Ic3Sandy <monkey_king2@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^18.7.14",
+    "firovm-sdk": "^0.0.6-alpha",
+    "typescript": "^4.8.2"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}

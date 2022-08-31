@@ -1,3 +1,0 @@
-POST http://test:test1234@127.0.0.1:3889
-Content-Type: application/json
-@send.json

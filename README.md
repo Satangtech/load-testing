@@ -20,21 +20,36 @@ vegeta --version
 echo "GET http://httpbin.org/get" | vegeta attack -duration=5s -rate=5 | vegeta report
 ```
 
-### Test in 1 minute with rate 10k/s
+### Run install and create raw tx
 
-- List of method (replace \* with method name)
+- Install lib
 
-  - getblockchaininfo
-  - send
-  - createcontract
-  - qrc20transfer
-  - qrc20balanceof
+```bash
+yarn install
+```
 
-- Modify files `req/*.http` and `req/*.json` for correct information.
+- Config files `createRawTx.ts`
 
-- Run command
+```typescript
+/**
+ * rpc url
+ * number of UTXO to prepare
+ * gas per transaction
+ */
+const url = "http://test:test1234@127.0.0.1:3889";
+const num = 1000;
+const gas = 0.01;
+const addr = "qJJpYnHBzkPjrQ1Nho5RAMLMMg8cizu558";
+```
 
-  ```bash
-  cd req
-  cat *.http | vegeta attack -duration=60s -rate=10000/s | vegeta report
-  ```
+- Run command gen raw tx
+
+```bash
+yarn ts-node createRawTx.ts
+```
+
+### Run Vegeta to load test
+
+```bash
+cat sendrawtransaction.http | vegeta attack -duration=10s -rate=100/s | vegeta report
+```

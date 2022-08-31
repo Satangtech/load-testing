@@ -1,9 +1,0 @@
-{
-  "jsonrpc": "2.0",
-  "method": "qrc20balanceof",
-  "params": [
-    "9332a61dd3c1bd40eae0c09f70f93d12eda7d3c5",
-    "qQyBUzYxg2qgxybnFRPq5d8ttcnvYUdMBw"
-  ],
-  "id": 1
-}
