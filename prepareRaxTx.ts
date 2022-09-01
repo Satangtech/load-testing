@@ -1,15 +1,17 @@
 import { RPCClient } from "firovm-sdk";
 import { promises as fs } from "fs";
 import { byteCode } from "./erc20";
+import {
+  url,
+  numUTXO,
+  fee,
+  addr,
+  createContract,
+  gasLimit,
+  gasPrice,
+} from "./config";
 
 const dirTx = "tx";
-const url = "http://test:test1234@127.0.0.1:3889"; // rpc url
-const numUTXO = 10; // number of UTXO to prepare
-const fee = 0.01; // fee per transaction
-const addr = "qUe9cwiX81Y729BMgPMV4enHVBbDPDj7Xf"; // Address from getnewaddress
-const createContract = false; // create contract or send payment
-const gasLimit = 2500000; // gas limit for create contract
-const gasPrice = "0.0000004"; // gas price for create contract
 const rpc = new RPCClient(url);
 
 async function createRawTransaction(utxo: any) {
