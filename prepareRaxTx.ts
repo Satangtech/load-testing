@@ -1,6 +1,3 @@
-/**
- * prepare enough raw Tx,
- */
 import { RPCClient } from "firovm-sdk";
 import { promises as fs } from "fs";
 import { byteCode } from "./erc20";
@@ -10,12 +7,12 @@ const url = "http://test:test1234@127.0.0.1:3889"; // rpc url
 const numUTXO = 10; // number of UTXO to prepare
 const fee = 0.01; // fee per transaction
 const addr = "qUe9cwiX81Y729BMgPMV4enHVBbDPDj7Xf"; // Address from getnewaddress
-const createContract = true; // create contract or send payment
+const createContract = false; // create contract or send payment
 const gasLimit = 2500000; // gas limit for create contract
 const gasPrice = "0.0000004"; // gas price for create contract
 const rpc = new RPCClient(url);
 
-async function createTransaction(utxo: any) {
+async function createRawTransaction(utxo: any) {
   const left = (utxo.amount - fee).toFixed(8);
   let data: any[];
 
@@ -56,10 +53,7 @@ async function getUtxoList() {
   return utxoList;
 }
 
-/**
- * prepare raw Tx
- */
-async function createRaxTx() {
+async function prepareRaxTx() {
   console.log("Start create raw transactions");
 
   const utxoList = await getUtxoList();
@@ -70,7 +64,7 @@ async function createRaxTx() {
 
   await fs.writeFile("sendrawtransaction.http", "");
   for (let i = 1; i <= numUTXO; i++) {
-    let rawTransaction = await createTransaction(utxoList[i]);
+    let rawTransaction = await createRawTransaction(utxoList[i]);
     let res;
 
     if (createContract) {
@@ -114,5 +108,5 @@ async function createRaxTx() {
   } catch (error) {
     fs.mkdir(dirTx);
   }
-  await createRaxTx();
+  await prepareRaxTx();
 })();
