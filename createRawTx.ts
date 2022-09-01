@@ -77,7 +77,7 @@ async function createRaxTx(
   const url = "http://test:test1234@127.0.0.1:3889";
   const num = 1000;
   const gas = 0.01;
-  const addr = "qJJpYnHBzkPjrQ1Nho5RAMLMMg8cizu558";
+  const addr = "qUe9cwiX81Y729BMgPMV4enHVBbDPDj7Xf";
   const rpc = new RPCClient(url);
 
   try {
