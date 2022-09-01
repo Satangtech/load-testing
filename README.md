@@ -73,28 +73,36 @@ qtum-cli listunspent | jq length
 yarn install
 ```
 
-- Config file `createRawTx.ts`
+- Config file `prepareRaxTx.ts`
 
 ```typescript
-/**
- * rpc url
- * number of UTXO to prepare
- * gas per transaction
- */
-const url = "http://test:test1234@127.0.0.1:3889";
-const num = 10000;
-const gas = 0.01;
-const addr = "qUe9cwiX81Y729BMgPMV4enHVBbDPDj7Xf";
+const url = "http://test:test1234@127.0.0.1:3889"; // rpc url
+const numUTXO = 10; // number of UTXO to prepare
+const fee = 0.01; // fee per transaction
+const addr = "qUe9cwiX81Y729BMgPMV4enHVBbDPDj7Xf"; // Address from getnewaddress
+const createContract = false; // create contract or send payment
+const gasLimit = 2500000; // gas limit for create contract
+const gasPrice = "0.0000004"; // gas price for create contract
 ```
 
 - Run command generate raw transaction
 
 ```bash
-yarn ts-node createRawTx.ts
+yarn ts-node prepareRaxTx.ts
 ```
 
 ### Run vegeta to send raw transactions is already signed to server
 
 ```bash
-cat sendrawtransaction.http | vegeta attack -duration=10s -rate=1000/s | vegeta report
+cat sendrawtransaction.http | vegeta attack -duration=1s -rate=10/s | vegeta report
+
+# output
+Requests      [total, rate, throughput]         10, 11.10, 10.46
+Duration      [total, attack, wait]             956.363ms, 900.679ms, 55.684ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  29.51ms, 65.221ms, 60.433ms, 106.098ms, 140.375ms, 140.375ms, 140.375ms
+Bytes In      [total, mean]                     980, 98.00
+Bytes Out     [total, mean]                     4498, 449.80
+Success       [ratio]                           100.00%
+Status Codes  [code:count]                      200:10
+Error Set:
 ```
