@@ -11,15 +11,26 @@ async function createTransaction(
   gas: number,
   addr: string
 ) {
-  let left = utxo.amount - gas;
-  let data: any = [[{ txid: utxo.txid, vout: utxo.vout }], { [addr]: left }];
+  const left = (utxo.amount - gas).toFixed(8);
+  const data: any = [
+    [{ txid: utxo.txid, vout: utxo.vout }],
+    [{ [addr]: left }],
+  ];
 
   const { result, error } = await rpc.rpc("createrawtransaction", data);
+  if (error) {
+    console.log(error);
+    throw error;
+  }
   return result;
 }
 
 async function getUtxoList(rpc: RPCClient) {
-  let { result } = await rpc.rpc("listunspent");
+  const { result, error } = await rpc.rpc("listunspent");
+  if (error) {
+    console.log(error);
+    throw error;
+  }
   const utxoList = result.filter((utxo: any) => utxo.amount >= 1);
   console.log("valid UTXO number: " + utxoList.length);
   return utxoList;
@@ -36,7 +47,7 @@ async function createRaxTx(
 ) {
   console.log("start create rawTx");
 
-  let utxoList = await getUtxoList(rpc);
+  const utxoList = await getUtxoList(rpc);
   if (utxoList.length < num) {
     console.log("not enough UTXOs");
     return;
@@ -44,10 +55,14 @@ async function createRaxTx(
 
   await fs.writeFile("sendrawtransaction.http", "");
   for (let i = 1; i <= num; i++) {
-    let rawTransaction = await createTransaction(rpc, utxoList[i], gas, addr);
+    const rawTransaction = await createTransaction(rpc, utxoList[i], gas, addr);
     const { result, error } = await rpc.rpc("signrawtransactionwithwallet", [
       rawTransaction,
     ]);
+    if (error) {
+      console.log(error);
+      throw error;
+    }
 
     await fs.writeFile(
       `${dirTx}/tx${i}.json`,
@@ -75,7 +90,7 @@ async function createRaxTx(
  */
 (async () => {
   const url = "http://test:test1234@127.0.0.1:3889";
-  const num = 1000;
+  const num = 10;
   const gas = 0.01;
   const addr = "qUe9cwiX81Y729BMgPMV4enHVBbDPDj7Xf";
   const rpc = new RPCClient(url);
