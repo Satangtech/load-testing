@@ -65,6 +65,22 @@ qtum-cli listunspent | jq length
 10000
 ```
 
+### Test send request to server
+
+- Edit file `getblockchaininfo.http` for correct url.
+
+```http
+POST http://test:test1234@127.0.0.1:3889
+Content-Type: application/json
+@getblockchaininfo.json
+```
+
+- Test send request to server.
+
+```bash
+cat getblockchaininfo.http | vegeta attack -duration=10s -rate=1000/s | vegeta report
+```
+
 ### Run install and create raw transaction
 
 - Install lib
