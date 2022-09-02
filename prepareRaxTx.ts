@@ -97,7 +97,7 @@ async function prepareRaxTx() {
     );
     await fs.appendFile(
       "sendrawtransaction.http",
-      `POST http://test:test1234@127.0.0.1:3889\nContent-Type: application/json\n@${dirTx}/tx${i}.json\n\n`
+      `POST ${url}\nContent-Type: application/json\n@${dirTx}/tx${i}.json\n\n`
     );
     console.log(`tx${i}`);
   }
