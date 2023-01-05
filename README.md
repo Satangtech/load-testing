@@ -1,4 +1,4 @@
-# Qtum Load Testing
+# Firovm Load Testing
 
 Use [Vegeta](https://github.com/tsenart/vegeta) for HTTP load testing.
 
@@ -32,7 +32,7 @@ echo "GET http://httpbin.org/get" | vegeta attack -duration=5s -rate=5 | vegeta 
 - Create wallet
 
 ```bash
-qtum-cli createwallet wallet1
+firovm-cli createwallet wallet1
 
 # output
 {
@@ -44,22 +44,22 @@ qtum-cli createwallet wallet1
 - Get new address
 
 ```bash
-qtum-cli getnewaddress
+firovm-cli getnewaddress
 
 # output
-qUe9cwiX81Y729BMgPMV4enHVBbDPDj7Xf
+TS7cQRdd6uU1wu2s94CmYsfe3WNUTctNih
 ```
 
 - Generate to Address
 
 ```bash
-qtum-cli generatetoaddress 10000 qUe9cwiX81Y729BMgPMV4enHVBbDPDj7Xf
+firovm-cli generatetoaddress 10000 TS7cQRdd6uU1wu2s94CmYsfe3WNUTctNih
 ```
 
 - Check unspent to target amount
 
 ```bash
-qtum-cli listunspent | jq length
+firovm-cli listunspent | jq length
 
 # output
 10000
@@ -95,7 +95,7 @@ yarn install
 export const url = "http://test:test1234@127.0.0.1:3889"; // rpc url
 export const numUTXO = 10; // number of UTXO to prepare
 export const fee = 0.01; // fee per transaction
-export const addr = "qUe9cwiX81Y729BMgPMV4enHVBbDPDj7Xf"; // Address from getnewaddress
+export const addr = "TS7cQRdd6uU1wu2s94CmYsfe3WNUTctNih"; // Address from getnewaddress
 export const createContract = false; // create contract or send payment
 export const gasLimit = 2500000; // gas limit for create contract
 export const gasPrice = "0.0000004"; // gas price for create contract

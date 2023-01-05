@@ -65,7 +65,7 @@ async function prepareRaxTx() {
   }
 
   await fs.writeFile("sendrawtransaction.http", "");
-  for (let i = 1; i <= numUTXO; i++) {
+  for (let i = 0; i < numUTXO; i++) {
     let rawTransaction = await createRawTransaction(utxoList[i]);
     let res;
 
